@@ -17,6 +17,18 @@ const solveSudoku = function (board) {
       }
     }
     return null
+
+    // проверка валеидности числа
+    const validate = (num, pos, board) => {
+      const [r, c] = pos // получаем строку и столбец деструктуризацией
+
+      for (let i = 0; i < size; i++) {
+        if (board[i][c] == num && i != r) return false
+      }
+      for (let i = 0; i < size; i++) {
+        if (board[r][i] == num && i != c) return false
+      }
+    }
   }
   const solve = () => {
     //поиск первой незаполненной
@@ -25,6 +37,11 @@ const solveSudoku = function (board) {
     if (currentPos === null) {
       return true
     }
+    for (let i = 1; i < size + 1; i++) {
+      const currNum = i.toString()
+      const isValid = validate(currNum, currentPos, board)
+    }
+
     return false
   }
   solve()
