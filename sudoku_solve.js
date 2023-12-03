@@ -9,7 +9,7 @@ const solveSudoku = function (board) {
   // тут пишу рекурсивную функцию для проверки возможности подставить в поле какое-то число. Алгоритм Depth-first search DFS.
 
   const findEmpty = (board) => {
-    for (let r = 0; r < size; i++) {
+    for (let r = 0; r < size; r++) {
       for (let c = 0; c < size; c++) {
         if (board[r][c] == '-') {
           return [r, c]
@@ -54,7 +54,13 @@ const solveSudoku = function (board) {
 
       if (isValid) {
         const [x, y] = currentPos
-        bord[x][y] = currNum
+        board[x][y] = currNum
+
+        //проверка на возможность решения всей доски после присвоения currNum рекурсивная функция для всего оставшегося борда.
+        if (solve()) {
+          return true
+        }
+        board[x][y] = '-'
       }
     }
 
@@ -64,5 +70,5 @@ const solveSudoku = function (board) {
   return board
 }
 
-console.table(input)
-console.table(solveSudoku(input))
+console.table(sudokuGrid)
+console.table(solveSudoku(sudokuGrid))
