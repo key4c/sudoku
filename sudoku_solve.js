@@ -17,18 +17,29 @@ const solveSudoku = function (board) {
       }
     }
     return null
+  }
 
-    // проверка валеидности числа
-    const validate = (num, pos, board) => {
-      const [r, c] = pos // получаем строку и столбец деструктуризацией
+  // проверка валеидности числа
+  const validate = (num, pos, board) => {
+    const [r, c] = pos // получаем строку и столбец деструктуризацией
 
-      for (let i = 0; i < size; i++) {
-        if (board[i][c] == num && i != r) return false
-      }
-      for (let i = 0; i < size; i++) {
-        if (board[r][i] == num && i != c) return false
+    for (let i = 0; i < size; i++) {
+      if (board[i][c] == num && i != r) return false
+    }
+    for (let i = 0; i < size; i++) {
+      if (board[r][i] == num && i != c) return false
+    }
+    // проверка числа в секторе
+    const boxRow = Math.floor(r / boxSize) * boxSize
+    const boxCol = Math.floor(c / boxSize) * boxSize
+    for (let i = boxRow; i < boxSize; i++) {
+      for (let j = boxCol; j < boxCol; j++) {
+        if (board[i][j] === num && i != r && j != c) {
+          return false
+        }
       }
     }
+    return true
   }
   const solve = () => {
     //поиск первой незаполненной
@@ -47,3 +58,6 @@ const solveSudoku = function (board) {
   solve()
   return board
 }
+
+console.table(input)
+console.table(solveSudoku(input))
