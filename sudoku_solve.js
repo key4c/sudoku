@@ -29,7 +29,7 @@ const solveSudoku = function (board) {
     for (let i = 0; i < size; i++) {
       if (board[r][i] == num && i != c) return false
     }
-    //     // проверка валеидности числа
+    // проверка валеидности числа
     const boxRow = Math.floor(r / boxSize) * boxSize
     const boxCol = Math.floor(c / boxSize) * boxSize
     for (let i = boxRow; i < boxSize; i++) {
@@ -48,9 +48,11 @@ const solveSudoku = function (board) {
     if (currentPos === null) {
       return true
     }
+    console.log('-------------------------------------')
     for (let i = 1; i < size + 1; i++) {
       const currNum = i.toString()
       const isValid = validate(currNum, currentPos, board)
+      console.log(currentPos, currNum, isValid)
 
       if (isValid) {
         const [x, y] = currentPos
